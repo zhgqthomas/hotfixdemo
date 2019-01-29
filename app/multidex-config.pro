@@ -1,0 +1,2 @@
+-keep class com.zhgqthomas.github.hotfixdemo.MyApplication
+-keep class com.zhgqthomas.github.hotfixdemo.MainActivity
