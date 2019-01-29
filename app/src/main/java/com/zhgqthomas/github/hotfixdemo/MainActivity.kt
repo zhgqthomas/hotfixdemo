@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import com.zhgqthomas.github.hotfixdemo.util.FileUtils
 
 class MainActivity : AppCompatActivity() {
 
@@ -26,5 +27,10 @@ class MainActivity : AppCompatActivity() {
             val bug = Bug()
             bug.calculate(applicationContext)
         }
+    }
+
+    fun fixBug() {
+        // 复制补丁 patch.dex 到
+        FileUtils.copyFiles()
     }
 }
