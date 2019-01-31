@@ -1,10 +1,13 @@
 package com.zhgqthomas.github.hotfixdemo
 
+import android.content.Context
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Environment
 import android.util.Log
 import android.widget.Button
 import com.zhgqthomas.github.hotfixdemo.util.FileUtils
+import java.io.File
 
 class MainActivity : AppCompatActivity() {
 
@@ -30,7 +33,24 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun fixBug() {
-        // 复制补丁 patch.dex 到
-        FileUtils.copyFiles()
+        // TODO 下载补丁 patch.dex 到 SD 卡中
+
+        // 复制补丁 patch.dex 到应用的私有目录下 odex 文件夹
+        val sourcePath = Environment.getExternalStorageDirectory().absolutePath + File.separator + Constants.PATH_DEX_NAME
+        val sourceFile = File(sourcePath)
+
+        val targetPath = getDir(Constants.DEX_DIR, Context.MODE_PRIVATE).absolutePath + File.separator + Constants.PATH_DEX_NAME
+        val targetFile = File(targetPath)
+
+        // 删除已存在的补丁
+        if (targetFile.exists()) {
+            targetFile.delete()
+            Log.i("Hotfix", "删除了原有补丁包")
+        }
+
+        // 执行复制操作
+        FileUtils.copyFiles(sourceFile, targetFile)
+
+
     }
 }
